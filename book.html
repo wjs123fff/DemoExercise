@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/book.css" />
+	</head>
+	<body>
+	<script type="text/javascript" src="vue.js"></script>
+		<!--<script type="text/javascript" src="js/book.js"></script>-->
+		<div id="app" >
+			<div v-if="books.length" >
+			<table border="" cellspacing="" cellpadding="">
+				<thead>
+				<!--<tr class="bg">
+					<th></th>
+					<th>书籍名称</th>
+					<th>出版日期</th>
+					<th>价值</th>
+					<th>购买数量</th>
+					<th>操作</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>《算法导论》</td>
+					<td>2006-9</td>
+					<td>$85.00</td>
+					<td>
+						<button>-</button>
+						<span></span>
+						<button>+</button>
+					</td>
+					<td><button>移除</button></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>《人月神话》</td>
+					<td>2006-2</td>
+					<td>$59.00</td>
+					<td>
+						<button>-</button>
+						<span></span>
+						<button>+</button>
+					</td>
+					<td><button>移除</button></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>《编程珠玑》</td>
+					<td>2006-10</td>
+					<td>$39.00</td>
+					<td>
+						<button>-</button>
+						<span></span>
+						<button>+</button>
+					</td>
+					<td><button>移除</button></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>《代码大全》</td>
+					<td>2006-3</td>
+					<td>$128.00</td>
+					<td>
+						<button>-</button>
+						<span></span>
+						<button>+</button>
+					</td>
+					<td><button>移除</button></td>
+				</tr>-->
+				</thead>
+				<tbody>
+					<tr >
+					<th></th>
+					<th>书籍名称</th>
+					<th>出版日期</th>
+					<th>价值</th>
+					<th>购买数量</th>
+					<th>操作</th>
+				</tr>
+					<tr v-for="(item ,index) in books">
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>{{item.date}}</td>
+						<td>{{item.price|getFinalPrice}}</td>
+						<td>
+						<button @click="decrement(index)" v-bind:disabled="item.count <= 1" >-</button>
+						{{item.count}}
+						<button @click="increment(index)">+</button>
+						</td>
+						<td class="bg"><button @click="remove(index)" >移除</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<span>总价:{{showPrice|getFinalPrice}}</span>
+			</div>
+			<div v-else>购物车为空</div>
+			<br />
+			<br />
+			<a href="" @click="aClick" class="btn">sumbit</a>
+		</div>
+	</body>
+	<script type="text/javascript">
+		const app = new Vue({
+				el:'#app',
+			  data:{
+					books:[
+					{id:1,
+					name:'《算法导论》',
+					date:'2006-9',
+					price:85.00,
+					count:1
+					},
+					{id:2,
+					name:'《人月神话》',
+					date:'2006-2',
+					price:59.00,
+					count:1
+					},
+					{id:3,
+					name:'《编程珠玑》',
+					date:'2006-10',
+					price:39.00,
+					count:1
+					},
+					{id:4,
+					name:'《代码大全》',
+					date:'2006-3',
+					price:128.00,
+					count:1
+					},
+					],
+					
+				},
+				methods:{
+					decrement(index){
+//						console.log("heool",index)			
+							this.books[index].count--;				
+					},
+					increment(index){
+//						console.log("ksdhs",index)
+						this.books[index].count++;
+					},
+					remove(index){
+						this.books.splice(index,1)
+					},
+	
+			},
+			computed:{
+				showPrice(){
+//					let totalPrice = 0;
+//					for(let i=0;i<this.books.length;i++)
+//					{
+//						totalPrice += this.books[i].price*this.books[i].count;
+//					}
+//					
+//					return totalPrice;
+                     return this.books.reduce(function(preValue,books){
+                     	return preValue + books.price * books.count;
+                     },0)
+				}
+			},
+			filters:{
+				 getFinalPrice(price){
+	           	return '$'+price.toFixed(2);
+	           }
+			}  //过滤器
+			})
+	</script>
+</html>

@@ -1,0 +1,94 @@
+body{
+	height: 100vh;
+	background: linear-gradient(#141e30,#243b55);
+}
+table{
+	border: 1px solid #e9e9e9;
+	border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th,td{
+	padding: 8px, 16px;
+	border: 1px,solid,#E9E9E9;
+	text-align: left;
+}
+th{
+	background-color: #f7f7f7;
+	color: #5c6b77;
+	font-weight: 600;
+}
+#app{
+	color: white;
+	position: absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%,-50%);
+	background: linear-gradient(#141e30,#243b55);
+	/*background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);*/
+	background-size: 400%;
+}
+button{
+	width: 50px;
+	height: 25px;
+	margin: 18px;
+	color: #f7f7f7;
+	border: 1px;
+	border-radius: 50px;
+	background: linear-gradient(45deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+	background-size: 400%;
+}
+
+.bg{
+	width: 80px;
+	height: 45px;
+}
+a{
+	position: absolute;
+	left: 50%;
+	top: 110%;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	transform: translate(-50%,-50%);
+	font-size: 20px;
+	background: linear-gradient(45deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+	background-size: 400%;
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	text-transform: uppercase;
+    border-radius: 40px;	
+	
+}
+a:before{
+	content: "";
+	position: absolute;
+	left: -5px;
+	right: -5px;
+	top: -5px;
+	bottom: -5px;
+	border: 1px solid red;
+	background: linear-gradient(45deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+	background-size: 400%;
+	 border-radius: 40px;
+	 filter: blur(20px);
+	 z-index: -1;
+}
+@keyframes sun{
+	100%{
+		background-position: -400% 0;
+	}
+}
+
+button,a:hover{
+	animation: sun 8s infinite;
+}
+
+a:hover::before{
+		animation: sun 8s infinite;
+}
+
+.active{
+	display: none;
+}
